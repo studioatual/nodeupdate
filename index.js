@@ -1,9 +1,14 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
+const express = require('express')
+const server = express()
+
+server.get('/', (req, res) => {
+  return res.send('ok')
+})
 
 function startApp() {
-  console.log('ok')
-  setTimeout(() => startApp(), 2000);
+  server.listen(3333, () => console.log('Server is started http://localhost:3333'))
 }
 
 app.whenReady().then(() => {

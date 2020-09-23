@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all --parallel server dev",
-    "server": "cross-env NODE_ENV=development electron .",
-    "build": "electron-builder",
+    "start": "electron .",
+    "build": "electron-builder --win --x64 --ia32",
     "publish": "electron-builder --win --x64 --ia32 -p onTagOrDraft"
   },
   "build": {
@@ -41,7 +40,8 @@
   "dependencies": {
     "electron": "^10.1.2",
     "electron-log": "^4.2.4",
-    "electron-updater": "^4.3.5"
+    "electron-updater": "^4.3.5",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
