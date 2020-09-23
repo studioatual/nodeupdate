@@ -1,0 +1,50 @@
+{
+  "name": "nodeupdate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm-run-all --parallel server dev",
+    "server": "cross-env NODE_ENV=development electron .",
+    "build": "electron-builder",
+    "publish": "electron-builder --win --x64 --ia32 -p onTagOrDraft"
+  },
+  "build": {
+    "appId": "com.studioatual.nodeupdate",
+    "productName": "nodeupdate",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "studioatual",
+        "repo": "nodeupdate"
+      }
+    ],
+    "directories": {
+      "buildResources": ".",
+      "output": "build"
+    },
+    "win": {
+      "verifyUpdateCodeSignature": false,
+      "publisherName": "studioatual",
+      "icon": "icons/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    }
+  },
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^10.1.2",
+    "electron-log": "^4.2.4",
+    "electron-updater": "^4.3.5"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "electron-builder": "^22.8.1"
+  }
+}
