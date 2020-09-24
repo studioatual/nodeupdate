@@ -10,7 +10,7 @@ const server = express()
 let mainTray = {};
 
 server.get('/', (req, res) => {
-  return res.send('ok')
+  return res.send('<h1 style="color: #c70000">Fbs Api - Online2 (v0.0.4)</h1>')
 })
 
 function callNotification() {
