@@ -1,20 +1,20 @@
 {
   "name": "nodeupdate",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --win --x64 --ia32",
-    "publish": "electron-builder --win --x64 --ia32 -p onTagOrDraft"
+    "build": "electron-builder --win",
+    "publish": "electron-builder --win -p onTagOrDraft"
   },
   "build": {
-    "appId": "com.studioatual.nodeupdate",
-    "productName": "nodeupdate",
+    "appId": "com.studioatual.fbsapi",
+    "productName": "FBS Api",
     "publish": [
       {
         "provider": "github",
         "owner": "studioatual",
-        "repo": "nodeupdate"
+        "repo": "fbsapi"
       }
     ],
     "directories": {
@@ -24,27 +24,18 @@
     "win": {
       "verifyUpdateCodeSignature": false,
       "publisherName": "studioatual",
-      "icon": "icons/icon.ico",
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        }
-      ]
+      "icon": "assets/icon.ico"
     }
   },
   "license": "MIT",
   "dependencies": {
-    "electron": "^10.1.2",
     "electron-log": "^4.2.4",
     "electron-updater": "^4.3.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
+    "electron": "^10.1.2",
     "electron-builder": "^22.8.1"
   }
 }
