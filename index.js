@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Menu, Tray, Notification, shell } = require('electron')
+const {app, BrowserWindow, Menu, Tray, Notification, shell, dialog } = require('electron')
 const log = require('electron-log')
 const { autoUpdater } = require('electron-updater')
 const path = require('path')
@@ -7,7 +7,7 @@ const server = require('./src')
 autoUpdater.autoDownload = false
 
 let mainTray = {};
-const api_port = process.env.FBS_API_PORT;
+const api_port = process.env.FBS_API_PORT
 
 function callNotification() {
   const notify = new Notification({
@@ -42,27 +42,38 @@ function startApp() {
 }
 
 app.whenReady().then(() => {
-  mainTray = new Tray(path.resolve(__dirname, 'assets', 'icon.png'));
-  startApp()
-  
-  // Check for new version
-  autoUpdater.checkForUpdatesAndNotify()
+  if (!api_port) {
+    dialog.showMessageBox({
+      type: 'error',
+      buttons: ['Ok'],
+      title: 'Variáveis de Ambiente NÃO Encontradas!',
+      message: 'Não foi possível encontrar a variável FBS_API_PORT',
+    }).then(result => {
+      app.quit()
+    })
+  } else {
+    mainTray = new Tray(path.resolve(__dirname, 'assets', 'icon.png'));
+    startApp()
+    
+    // Check for new version
+    autoUpdater.checkForUpdatesAndNotify()
 
-  // Not available an update
-  autoUpdater.on('update-not-available', updateNotAvailable)
+    // Not available an update
+    autoUpdater.on('update-not-available', updateNotAvailable)
 
-  // Available an update
-  autoUpdater.on('update-available', updateAvailable)
+    // Available an update
+    autoUpdater.on('update-available', updateAvailable)
 
-  // Track download progress on autoUpdater
-  autoUpdater.on('download-progress', updateDownloadProgress)
+    // Track download progress on autoUpdater
+    autoUpdater.on('download-progress', updateDownloadProgress)
 
-  // Listen for completed update download
-  autoUpdater.on('update-downloaded', updateDownloaded)
+    // Listen for completed update download
+    autoUpdater.on('update-downloaded', updateDownloaded)
 
-  app.on('activate', function () {
-    if (BrowserWindow.getAllWindows().length === 0) startApp()
-  })
+    app.on('activate', function () {
+      if (BrowserWindow.getAllWindows().length === 0) startApp()
+    })
+  }
 })
 
 app.on('window-all-closed', function () {

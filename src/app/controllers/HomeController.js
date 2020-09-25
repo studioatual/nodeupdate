@@ -1,6 +1,6 @@
 class HomeController {
     index(req, res) {
-      return res.json({ message: 'Hello World!' });
+      return res.json({ message: 'FBS Api Online - v0.0.6 (Complete)!' });
     }
   }
   
