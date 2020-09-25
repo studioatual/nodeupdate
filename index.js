@@ -1,22 +1,18 @@
 const {app, BrowserWindow, Menu, Tray, Notification, shell } = require('electron')
-const log = require('electron-log');
+const log = require('electron-log')
 const { autoUpdater } = require('electron-updater')
 const path = require('path')
-const express = require('express')
+const server = require('./src')
 
 autoUpdater.autoDownload = false
 
-const server = express()
 let mainTray = {};
-
-server.get('/', (req, res) => {
-  return res.send('<h1 style="color: #c70000">Fbs Api - Online2 (v0.0.4)</h1>')
-})
+const api_port = process.env.FBS_API_PORT;
 
 function callNotification() {
   const notify = new Notification({
     title: 'FBS Api Started!',
-    body: `O endereço do servidor: \n http://localhost:3333`,
+    body: `O endereço do servidor: \n http://localhost:${api_port}`,
     icon: path.resolve(__dirname, 'assets', 'icon.png')
   })
   notify.show()
@@ -28,7 +24,7 @@ function startApp() {
       type: 'normal',
       label: 'Abrir Endereço da Api',
       icon: path.resolve(__dirname, 'assets', 'share.png'),
-      click: () => shell.openExternal('http://localhost:3333'),
+      click: () => shell.openExternal(`http://localhost:${api_port}`),
       enabled: true
     },
     {
@@ -41,7 +37,7 @@ function startApp() {
   ]);
   mainTray.setContextMenu(contextMenu);
   mainTray.setToolTip('FBS Api Software.')
-  server.listen(3333, () => console.log('Server is started http://localhost:3333'))
+  server.start(api_port)
   callNotification()
 }
 

@@ -36,7 +36,6 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2",
     "electron": "^10.1.2",
     "electron-builder": "^22.8.1"
   }
