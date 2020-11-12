@@ -1,6 +1,6 @@
 {
   "name": "nodeupdate",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Software FBS Api",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,11 @@
   "dependencies": {
     "electron-log": "^4.2.4",
     "electron-updater": "^4.3.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-react-views": "^0.11.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "electron": "^10.1.2",

@@ -3,6 +3,7 @@ const HomeController = require('./app/controllers/HomeController');
 
 const routes = new Router();
 
-routes.get('/', HomeController.index);
+routes.get('/api', HomeController.index);
+routes.get('/', HomeController.show);
 
 module.exports = routes;
